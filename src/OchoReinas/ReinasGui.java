@@ -27,7 +27,7 @@ public class ReinasGui extends JPanel {
         f.setResizable(false);
         f.setSize(this.imgBackground.getWidth(null), this.imgBackground.getHeight(null));
 
-        reinas app = new reinas(this);
+        Reinas app = new Reinas(this);
     }
 
     public void createAndAddPiece(int x, int y) {
