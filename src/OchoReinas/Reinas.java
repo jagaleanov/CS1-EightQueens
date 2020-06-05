@@ -13,7 +13,7 @@ public class Reinas {
     private static final int TILE_OFFSET_Y = 50;
     private int i;
     private boolean[] existSolution = new boolean[1];
-    private boolean[] columns = new boolean[9];
+    private boolean[] rows = new boolean[9];
     private boolean[] diagSup = new boolean[17];
     private boolean[] diagInf = new boolean[15];
     private int[] solution = new int[9];
@@ -25,7 +25,7 @@ public class Reinas {
         this.gui = gui;
 
         for (int i = 1; i <= 8; i++) {
-            columns[i] = true;
+            rows[i] = true;
         }
         for (int i = 2; i <= 16; i++) {
             diagSup[i] = true;
@@ -60,11 +60,11 @@ public class Reinas {
             row = row + 1;
             existSolution[0] = false;
 
-            if (columns[row] && diagSup[col + row] && diagInf[col - row + 7]) {
+            if (rows[row] && diagSup[col + row] && diagInf[col - row + 7]) {
 
                 solution[col] = row;
 
-                columns[row] = false;
+                rows[row] = false;
                 diagSup[col + row] = false;
                 diagInf[col - row + 7] = false;
 
@@ -80,7 +80,7 @@ public class Reinas {
                 if (col < 8) {
                     start((col + 1), existSolution);
                     if (!existSolution[0]) {
-                        columns[row] = true;
+                        rows[row] = true;
                         diagSup[col + row] = true;
                         diagInf[col - row + 7] = true;
 
