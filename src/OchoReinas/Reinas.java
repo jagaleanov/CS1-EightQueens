@@ -20,7 +20,7 @@ public class Reinas {
 
     ReinasGui gui;
 
-    public reinas(ReinasGui gui) {
+    public Reinas(ReinasGui gui) {
 
         this.gui = gui;
 
@@ -40,10 +40,11 @@ public class Reinas {
 
             String response = "";
 
-            for (int i = 0; i < 8; i++) {
-                response += "(" + (i + 1) + "," + (solution[i] + 1) + ")";
+            for (int i = 1; i < 9; i++) {
+                response += "(" + (i) + "," + (solution[i]) + ")";
+                System.out.println(solution[i]);
             }
-            System.out.println("");
+            System.out.println(solution.toString());
 
             System.out.println("Lo logramos!!");
 
@@ -71,9 +72,9 @@ public class Reinas {
                         BOARD_START_Y + TILE_OFFSET_Y * (col - 1));
                 gui.repaint();
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(50);
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(reinas.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 if (row < 8) {
@@ -86,9 +87,9 @@ public class Reinas {
                         gui.removePiece(BOARD_START_X + TILE_OFFSET_X * (row - 1) + 2, BOARD_START_Y + TILE_OFFSET_Y * (col - 1) + 2);
                         gui.repaint();
                         try {
-                            Thread.sleep(10);
+                            Thread.sleep(50);
                         } catch (InterruptedException ex) {
-                            Logger.getLogger(reinas.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 } else {
