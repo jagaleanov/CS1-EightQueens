@@ -42,9 +42,7 @@ public class Reinas {
 
             for (int i = 1; i < 9; i++) {
                 response += "(" + (i) + "," + (solution[i]) + ")";
-                System.out.println(solution[i]);
             }
-            System.out.println(solution.toString());
 
             System.out.println("Lo logramos!!");
 
