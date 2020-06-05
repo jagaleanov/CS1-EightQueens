@@ -46,7 +46,7 @@ public class Reinas {
 
             System.out.println("Lo logramos!!");
 
-            JOptionPane.showMessageDialog(gui, "Solución: " + response);
+            JOptionPane.showMessageDialog(gui, "Solución encontrada: " + response);
         }
     }
 
@@ -70,7 +70,7 @@ public class Reinas {
                         BOARD_START_Y + TILE_OFFSET_Y * (row - 1));
                 gui.repaint();
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(150);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -85,7 +85,7 @@ public class Reinas {
                         gui.removePiece(BOARD_START_X + TILE_OFFSET_X * (col - 1) + 2, BOARD_START_Y + TILE_OFFSET_Y * (row - 1) + 2);
                         gui.repaint();
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(150);
                         } catch (InterruptedException ex) {
                             Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
                         }
