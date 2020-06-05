@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class reinas {
+public class Reinas {
 
     private static final int BOARD_START_X = 2;
     private static final int BOARD_START_Y = 2;
