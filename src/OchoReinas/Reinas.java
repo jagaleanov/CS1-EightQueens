@@ -46,7 +46,7 @@ public class Reinas {
 
             System.out.println("Lo logramos!!");
 
-            JOptionPane.showMessageDialog(gui, "La respuesta es: " + response);
+            JOptionPane.showMessageDialog(gui, "Solución: " + response);
         }
     }
 
