@@ -52,24 +52,24 @@ public class Reinas {
         }
     }
 
-    public boolean[] start(int row, boolean[] existSolution) {
-        int col;
-        col = 0;
+    public boolean[] start(int col, boolean[] existSolution) {
+        int row;
+        row = 0;
 
         do {
-            col = col + 1;
+            row = row + 1;
             existSolution[0] = false;
 
-            if (columns[col] && diagSup[row + col] && diagInf[row - col + 7]) {
+            if (columns[row] && diagSup[col + row] && diagInf[col - row + 7]) {
 
-                solution[row] = col;
+                solution[col] = row;
 
-                columns[col] = false;
-                diagSup[row + col] = false;
-                diagInf[row - col + 7] = false;
+                columns[row] = false;
+                diagSup[col + row] = false;
+                diagInf[col - row + 7] = false;
 
-                gui.createAndAddPiece(BOARD_START_X + TILE_OFFSET_X * (row - 1),
-                        BOARD_START_Y + TILE_OFFSET_Y * (col - 1));
+                gui.createAndAddPiece(BOARD_START_X + TILE_OFFSET_X * (col - 1),
+                        BOARD_START_Y + TILE_OFFSET_Y * (row - 1));
                 gui.repaint();
                 try {
                     Thread.sleep(50);
@@ -77,14 +77,14 @@ public class Reinas {
                     Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if (row < 8) {
-                    start((row + 1), existSolution);
+                if (col < 8) {
+                    start((col + 1), existSolution);
                     if (!existSolution[0]) {
-                        columns[col] = true;
-                        diagSup[row + col] = true;
-                        diagInf[row - col + 7] = true;
+                        columns[row] = true;
+                        diagSup[col + row] = true;
+                        diagInf[col - row + 7] = true;
 
-                        gui.removePiece(BOARD_START_X + TILE_OFFSET_X * (row - 1) + 2, BOARD_START_Y + TILE_OFFSET_Y * (col - 1) + 2);
+                        gui.removePiece(BOARD_START_X + TILE_OFFSET_X * (col - 1) + 2, BOARD_START_Y + TILE_OFFSET_Y * (row - 1) + 2);
                         gui.repaint();
                         try {
                             Thread.sleep(50);
@@ -96,7 +96,7 @@ public class Reinas {
                     existSolution[0] = true;
                 }
             }
-        } while (!existSolution[0] && col != 8);
+        } while (!existSolution[0] && row != 8);
         return existSolution;
     }
 }
