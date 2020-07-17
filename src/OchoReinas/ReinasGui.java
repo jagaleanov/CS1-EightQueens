@@ -6,14 +6,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import OchoReinas.Piece;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ReinasGui extends JPanel {
 
     private Image imgBackground;
+        JButton button = new JButton("start/pause");
 
     private List<Piece> pieces = new ArrayList<Piece>();
 
@@ -23,11 +27,13 @@ public class ReinasGui extends JPanel {
         JFrame f = new JFrame();
         f.setVisible(true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(button);
         f.add(this);
         f.setResizable(false);
         f.setSize(this.imgBackground.getWidth(null), this.imgBackground.getHeight(null));
 
         Reinas app = new Reinas(this);
+
     }
 
     public void createAndAddPiece(int x, int y) {

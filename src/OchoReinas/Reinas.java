@@ -1,5 +1,7 @@
 package OchoReinas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -11,16 +13,25 @@ public class Reinas {
 
     private static final int TILE_OFFSET_X = 50;
     private static final int TILE_OFFSET_Y = 50;
-    private int i;
+
     private boolean[] existSolution = new boolean[1];
     private boolean[] rows = new boolean[9];
     private boolean[] diagSup = new boolean[17];
     private boolean[] diagInf = new boolean[15];
     private int[] solution = new int[9];
 
+    private boolean flag = true;
+
     ReinasGui gui;
 
     public Reinas(ReinasGui gui) {
+        
+        gui.button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changeFlag();
+            }
+        });
 
         this.gui = gui;
 
@@ -55,46 +66,60 @@ public class Reinas {
         row = 0;
 
         do {
-            row = row + 1;
-            existSolution[0] = false;
+            System.out.println("exe");
+            if (flag) {
 
-            if (rows[row] && diagSup[col + row] && diagInf[col - row + 7]) {
+                row = row + 1;
+                existSolution[0] = false;
 
-                solution[col] = row;
+                if (rows[row] && diagSup[col + row] && diagInf[col - row + 7]) {
 
-                rows[row] = false;
-                diagSup[col + row] = false;
-                diagInf[col - row + 7] = false;
+                    solution[col] = row;
 
-                gui.createAndAddPiece(BOARD_START_X + TILE_OFFSET_X * (col - 1),
-                        BOARD_START_Y + TILE_OFFSET_Y * (row - 1));
-                gui.repaint();
-                try {
-                    Thread.sleep(150);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    rows[row] = false;
+                    diagSup[col + row] = false;
+                    diagInf[col - row + 7] = false;
 
-                if (col < 8) {
-                    start((col + 1), existSolution);
-                    if (!existSolution[0]) {
-                        rows[row] = true;
-                        diagSup[col + row] = true;
-                        diagInf[col - row + 7] = true;
-
-                        gui.removePiece(BOARD_START_X + TILE_OFFSET_X * (col - 1) + 2, BOARD_START_Y + TILE_OFFSET_Y * (row - 1) + 2);
-                        gui.repaint();
-                        try {
-                            Thread.sleep(150);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                    gui.createAndAddPiece(BOARD_START_X + TILE_OFFSET_X * (col - 1),
+                            BOARD_START_Y + TILE_OFFSET_Y * (row - 1));
+                    gui.repaint();
+                    try {
+                        Thread.sleep(150);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                } else {
-                    existSolution[0] = true;
+
+                    if (col < 8) {
+                        start((col + 1), existSolution);
+                        if (!existSolution[0]) {
+                            rows[row] = true;
+                            diagSup[col + row] = true;
+                            diagInf[col - row + 7] = true;
+
+                            gui.removePiece(BOARD_START_X + TILE_OFFSET_X * (col - 1) + 2, BOARD_START_Y + TILE_OFFSET_Y * (row - 1) + 2);
+                            gui.repaint();
+                            try {
+                                Thread.sleep(150);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Reinas.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    } else {
+                        existSolution[0] = true;
+                    }
                 }
             }
         } while (!existSolution[0] && row != 8);
         return existSolution;
     }
+
+    public void changeFlag() {
+        if (flag) {
+            flag = false;
+        } else {
+            flag = true;
+        }
+    }
+    
+    
 }
